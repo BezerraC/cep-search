@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./CepApi
+    ports:
+      - "5220:80"  # Porta HTTP
+      - "7220:7220"  # Porta HTTPS
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+    networks:
+      - cep-network
+
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "8080:80"  # Porta do Nginx
+    networks:
+      - cep-network
+
+networks:
+  cep-network:
